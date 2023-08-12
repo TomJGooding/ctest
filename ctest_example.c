@@ -25,9 +25,9 @@ int all_tests() {
 int main(int argc, char** argv) {
     int result = all_tests();
     if (result == 0) {
-        printf("ALL TESTS PASSED\n");
+        printf(ANSI_COLOR_GREEN "ALL TESTS PASSED\n" ANSI_COLOR_RESET);
     }
-    printf("\nTests run: %d\n", tests_run);
+    printf("Tests run: %d\n", tests_run);
 
     return result != 0;
 }
