@@ -1,4 +1,5 @@
-#define ctest_fail() printf("FAILED %s, line %d\n", __func__, __LINE__)
+#define ctest_fail() \
+    printf("FAILED %s::%s, line %d\n", __FILE__, __func__, __LINE__)
 
 #define ctest_assert(test) \
     do {                   \
