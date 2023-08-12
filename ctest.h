@@ -1,5 +1,10 @@
-#define ctest_fail() \
-    printf("FAILED %s::%s, line %d\n", __FILE__, __func__, __LINE__)
+#define ANSI_COLOR_RED "\x1b[31m"
+#define ANSI_COLOR_GREEN "\x1b[32m"
+#define ANSI_COLOR_RESET "\x1b[0m"
+
+#define ctest_fail()                                   \
+    printf(ANSI_COLOR_RED "FAILED " ANSI_COLOR_RESET); \
+    printf("%s::%s, line %d\n", __FILE__, __func__, __LINE__)
 
 #define ctest_assert(test) \
     do {                   \
