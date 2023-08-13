@@ -2,8 +2,6 @@
 
 #include "ctest.h"
 
-int tests_run = 0;
-
 int foo = 7;
 int bar = 4;
 
@@ -24,9 +22,6 @@ int all_tests() {
 
 int main(int argc, char** argv) {
     int result = all_tests();
-    if (result == 0) {
-        printf(ANSI_COLOR_GREEN "ALL TESTS PASSED\n" ANSI_COLOR_RESET);
-    }
     ctest_report();
 
     return result != 0;

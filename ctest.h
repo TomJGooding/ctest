@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <time.h>
 
+static int tests_passed = 0;
+static int tests_failed = 0;
+
 static clock_t start_time = -1;
 
 #define ANSI_COLOR_RED "\x1b[31m"
@@ -25,16 +28,27 @@ static clock_t start_time = -1;
             start_time = clock(); \
         }                         \
         int failed = test();      \
-        tests_run++;              \
-        if (failed)               \
+        if (failed) {             \
+            tests_failed++;       \
             return failed;        \
+        } else {                  \
+            tests_passed++;       \
+        }                         \
     } while (0)
 
-#define ctest_report()                                                        \
-    do {                                                                      \
-        clock_t end_time = clock();                                           \
-        double time_taken = (double)(end_time - start_time) / CLOCKS_PER_SEC; \
-        printf("Ran %d tests in %0.2fs\n", tests_run, time_taken);            \
+#define ctest_report()                                                         \
+    do {                                                                       \
+        clock_t end_time = clock();                                            \
+        double time_taken = (double)(end_time - start_time) / CLOCKS_PER_SEC;  \
+        if (tests_failed > 0) {                                                \
+            printf(                                                            \
+                (ANSI_COLOR_RED "%d failed " ANSI_COLOR_RESET), tests_failed   \
+            );                                                                 \
+        }                                                                      \
+        if (tests_passed > 0) {                                                \
+            printf(                                                            \
+                (ANSI_COLOR_GREEN "%d passed " ANSI_COLOR_RESET), tests_passed \
+            );                                                                 \
+        }                                                                      \
+        printf("in %0.2fs\n", time_taken);                                     \
     } while (0)
-
-extern int tests_run;
