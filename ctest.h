@@ -17,14 +17,11 @@ static clock_t start_time = -1;
 
 #define ctest_test_suite(suite_name) static void suite_name(void)
 
-#define print_suite_name(suite_name) \
-    (sizeof(suite_name), printf("%s ", #suite_name))
-
-#define ctest_run_suite(suite_name)   \
-    do {                              \
-        print_suite_name(suite_name); \
-        suite_name();                 \
-        printf("\n");                 \
+#define ctest_run_suite(suite_name) \
+    do {                            \
+        printf("%s ", #suite_name); \
+        suite_name();               \
+        printf("\n");               \
     } while (0)
 
 #define ctest_report()                                                         \
@@ -73,10 +70,10 @@ static clock_t start_time = -1;
             snprintf(                                           \
                 failures_report + strlen(failures_report),      \
                 FAILURES_REPORT_SIZE - strlen(failures_report), \
-                "%s::%s, line %d\n",                            \
+                "%s::%s - Error: %s\n",                         \
                 __FILE__,                                       \
                 __func__,                                       \
-                __LINE__                                        \
+                #test                                           \
             );                                                  \
             return 1;                                           \
         }                                                       \
