@@ -6,6 +6,8 @@ static int tests_failed = 0;
 
 static clock_t start_time = -1;
 
+#define CTEST_EXIT_CODE tests_failed != 0
+
 #define ANSI_COLOR_RED "\x1b[31m"
 #define ANSI_COLOR_GREEN "\x1b[32m"
 #define ANSI_COLOR_RESET "\x1b[0m"
@@ -30,7 +32,6 @@ static clock_t start_time = -1;
         int failed = test();      \
         if (failed) {             \
             tests_failed++;       \
-            return failed;        \
         } else {                  \
             tests_passed++;       \
         }                         \
